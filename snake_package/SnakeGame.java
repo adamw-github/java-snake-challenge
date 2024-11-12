@@ -52,6 +52,10 @@ public class SnakeGame extends JFrame implements ActionListener, KeyListener {
     private String currDirection;
     List<GameLabel> snakeTiles = new ArrayList<>();
 
+    public SnakeGame(){
+        this(16, 150);
+    }
+
     public SnakeGame(int size, int game_tick){
         super("Snake Game");
         this.size = size;
@@ -280,8 +284,15 @@ public class SnakeGame extends JFrame implements ActionListener, KeyListener {
         timer.setDelay(game_tick);
         timer.start();
     }
-    public static void main(String[] args){
-        SnakeGame game = new SnakeGame(16, 150);
 
+    public static void main(String[] args){
+        if(args.length != 2){
+            System.out.println("Invalid arguments. Using default values: Size=16x16, tick=150");
+            SnakeGame game = new SnakeGame();
+        } else{
+            int size = Integer.parseInt(args[0]);
+            int tick = Integer.parseInt(args[1]);
+            SnakeGame game = new SnakeGame(size, tick);
+        }
     }
 }
